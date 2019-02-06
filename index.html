@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on('news', function (data) {
+        console.log(data);
+        socket.emit('my other event', { my: 'data' });
+      });
+      function clicked_more() {
+        console.log("web clicked more");
+        socket.emit("web:server", {volume: "increase"}, function() {});
+      };
+      function clicked_less() {
+        console.log("web click less");
+        socket.emit("web:server", {volume: "decrease"}, function() {
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <h1>DONATE:</h1>
+    <button id="butt" onClick="clicked_more()">MORE</button>
+    <button id="butt" onClick="clicked_less()">LESS</button>
+  </body>
+</html>
