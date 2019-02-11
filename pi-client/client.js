@@ -16,10 +16,12 @@ socket.on('server:pi', function(data, response) {
   console.log("PI receive from server:");
   console.log(data);
   if (data.volume == "decrease") {
-    var rand = Math.floor(Math.random() * audios.length);
-    console.log("removing " rand + " of " + audios.length);
-    var clip_remove = audios.splice(rand, 1)[0];
-    clip_remove.kill();
+    if (audios.length > 0) {
+      var rand = Math.floor(Math.random() * audios.length);
+      console.log("removing " + rand + " of " + audios.length);
+      var clip_remove = audios.splice(rand, 1)[0];
+      clip_remove.kill();
+    }
   } else {
     var clip = player.play('audio/audio1.mp3', {play: ''},  function(err) {
       if (err) throw err;
