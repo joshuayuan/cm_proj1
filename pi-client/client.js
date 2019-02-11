@@ -1,5 +1,6 @@
 var io = require('socket.io-client');
-var socket = io('http://joshuayuan.me:8081');
+// var socket = io('http://joshuayuan.me:8081');
+var socket = io('http://localhost:8081');
 var player = require('play-sound')(opts = {});
 
 var audios = [];

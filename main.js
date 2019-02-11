@@ -1,20 +1,15 @@
-var app = require("http").createServer(handler);
-var io = require('socket.io')(app);
-var fs = require('fs');
-app.listen(8081);
+var app = require("express")();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+server.listen(8081);
 
-function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-    function (err, data) {
-      if (err) {
-        res.writeHead(500);
-        return res.end('Error loading index.html');
-      }
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/web-client/index.html');
+});
 
-      res.writeHead(200);
-      res.end(data);
-    });
-}
+app.get('/script.js', function(req, res) {
+  res.sendFile(__dirname + '/web-client/script.js');
+});
 
 io.on('connection', function (socket) {
   socket.on("pi:server", function(data, callback) {
