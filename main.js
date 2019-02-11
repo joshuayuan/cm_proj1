@@ -4,7 +4,7 @@ var fs = require('fs');
 app.listen(8081);
 
 function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
+  fs.readFile(__dirname + '/web-client/index.html',
     function (err, data) {
       if (err) {
         res.writeHead(500);
